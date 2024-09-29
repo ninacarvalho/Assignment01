@@ -39,12 +39,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateBtn(_ sender: Any) {
-        guard let weight = strToDouble(weightInput), weight > 0 else {
+        guard let weight = strToDouble(weightInput), weight > 0, weight < 1000 else {
             bmiResultLbl.text = "Invalid weight"
                 return
         }
         
-        guard let height = strToDouble(heightInput), height > 0 else {
+        guard let height = strToDouble(heightInput), height > 0, height < 200 else {
             bmiResultLbl.text = "Invalid height"
             return
         }
@@ -68,6 +68,7 @@ class ViewController: UIViewController {
             changeLabelsToImperial()
             isMetric = false
         }
+        clearFields();
     }
     
     func getCategory (_ bmi: Double) -> String {
@@ -102,5 +103,14 @@ class ViewController: UIViewController {
     func changeLabelsToImperial (){
         weightUnitLbl.text = "lbs"
         heightUnitLbl.text = "in"
+    }
+    
+    func clearFields (){
+        bmiResultLbl.text = ""
+        bmiCategoryLbl.text = ""
+        bmiIntervalsTxt.text = ""
+        weightInput.text = ""
+        heightInput.text = ""
+
     }
 }
